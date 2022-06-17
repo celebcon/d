@@ -94,22 +94,22 @@ button.prototype.draw = function() {
 
 var buttonArray = [];
 
-buttonArray.push(new button(365,140,480,220,300,"\n\nMilana Vayntrub: Daily Nudes",1));
-buttonArray.push(new button(500,140,610,220,1000,"\n\nMilana Vayntrub: Daily Footjobs",1));
-buttonArray.push(new button(640,140,760,220,1500,"\n\nMilana Vayntrub: Daily Blowjobs",1));
+buttonArray.push(new button(365,140,480,220,500,"\n\nMilana Vayntrub: Daily Nudes",1));
+buttonArray.push(new button(500,140,610,220,800,"\n\nMilana Vayntrub: Daily Footjobs",1));
+buttonArray.push(new button(640,140,760,220,1000,"\n\nMilana Vayntrub: Daily Blowjobs",1));
 
-buttonArray.push(new button(365,250,480,330,1500,"\n\nMilana Vayntrub: Daily Thighjobs",1));
-buttonArray.push(new button(500,250,610,330,1500,"\n\nMilana Vayntrub: Daily Titjobs",1));
-buttonArray.push(new button(640,250,760,330,3000,"\n\nMilana Vayntrub: Daily Anal",1));
+buttonArray.push(new button(365,250,480,330,1200,"\n\nMilana Vayntrub: Daily Thighjobs",1));
+buttonArray.push(new button(500,250,610,330,1300,"\n\nMilana Vayntrub: Daily Titjobs",1));
+buttonArray.push(new button(640,250,760,330,1800,"\n\nMilana Vayntrub: Daily Anal",1));
 
 
-buttonArray.push(new button(365 + 800,140,480 + 800,220,500,"\n\nEmilia Clarke: Daily Nudes",1));
-buttonArray.push(new button(500 + 800,140,610 + 800,220,1100,"\n\nEmilia Clarke: Daily Footjobs",1));
-buttonArray.push(new button(640 + 800,140,760 + 800,220,1800,"\n\nEmilia Clarke: Daily Blowjobs",1));
+buttonArray.push(new button(365 + 800,140,480 + 800,220,600,"\n\nEmilia Clarke: Daily Nudes",1));
+buttonArray.push(new button(500 + 800,140,610 + 800,220,900,"\n\nEmilia Clarke: Daily Footjobs",1));
+buttonArray.push(new button(640 + 800,140,760 + 800,220,1200,"\n\nEmilia Clarke: Daily Blowjobs",1));
 
-buttonArray.push(new button(365 + 800,250,480 + 800,330,1600,"\n\nEmilia Clarke: Daily Thighjobs",1));
-buttonArray.push(new button(500 + 800,250,610 + 800,330,1300,"\n\nEmilia Clarke: Daily Titjobs",1));
-buttonArray.push(new button(640 + 800,250,760 + 800,330,3900,"\n\nEmilia Clarke: Daily Anal",1));
+buttonArray.push(new button(365 + 800,250,480 + 800,330,1300,"\n\nEmilia Clarke: Daily Thighjobs",1));
+buttonArray.push(new button(500 + 800,250,610 + 800,330,1400,"\n\nEmilia Clarke: Daily Titjobs",1));
+buttonArray.push(new button(640 + 800,250,760 + 800,330,2000,"\n\nEmilia Clarke: Daily Anal",1));
 
 function clickfunc(){
 
@@ -131,9 +131,13 @@ if (canvasX > 0 && canvasX < 60 && canvasY > 330 && canvasY < 400){shiftX = shif
 
 var myVar = setInterval(move, 20);
 
+
+//IMPORTANT
 var scene = 1; 
 
 var points = 30000;
+
+//IMPORTANT
 
 var shiftX = 0;
 
@@ -144,7 +148,7 @@ var printout = "";
 function move() {
 
 //BG
-ctx.fillStyle = "black";
+ctx.fillStyle = "#2d8ac2";
 ctx.fillRect(0,0, 800, 400);
 
 ctx.fillStyle = "gray";
@@ -157,7 +161,6 @@ ctx.fillText("Y: " + canvasY,3,440);
 
 ctx.fillText("shiftX: " + shiftX,220,420);
 ctx.fillText("shiftY: " + shiftY,220,440);
-
 
 ctx.fillText("Scene: " + scene,80,420);
 ctx.fillText("Points: " + points,80,440);
