@@ -1,0 +1,216 @@
+<html>
+
+<style>
+p.a {
+  white-space: pre;
+  color: white;
+}
+</style>
+
+<body style="background-color:black;">
+
+<canvas id="myCanvas" onload = 'move()' onclick = "clickfunc()" width="800" height="450" style=" padding-left: 0;
+    padding-right: 0;
+	
+    margin-left: auto;
+    margin-right: auto;
+	margin-top: 0px;
+    display: block;border:3px solid white;">
+</canvas>
+
+</body>
+
+
+<script>
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+ctx.font = "16px Arial";
+
+var canvasX = 0; 
+var canvasY = 0; 
+canvas.addEventListener("mousemove", function(e) { 
+    var cRect = canvas.getBoundingClientRect();              // Gets the CSS positions along with width/height
+    canvasX = Math.round(e.clientX - cRect.left);        // Subtract the 'left' of the canvas from the X/Y
+    canvasY = Math.round(e.clientY - cRect.top);         // positions to get make (0,0) the top left of the    
+});
+
+
+function sound(src) {
+ this.sound = document.createElement("audio");
+this.sound.src = src;
+this.sound.setAttribute("preload", "auto");
+this.sound.setAttribute("controls", "none");
+this.sound.style.display = "none";
+document.body.appendChild(this.sound);
+this.play = function(){
+this.sound.play();
+}
+this.stop = function(){
+this.sound.pause();
+}   
+}
+
+tabSound = new sound("sounds/tabSound.mp3");
+assignedSound = new sound("sounds/assignedSound.mp3");
+
+var button = function(x,y,endx,endy,c,n,s) {
+    this.x = x;
+    this.y = y;
+	this.endx = endx;
+    this.endy = endy;
+    this.w = this.endx - this.x;
+    this.h = this.endy - this.y;
+	this.c = c;
+	this.n = n;
+	this.s = s; 
+	this.verified = false;
+	this.checking = false;
+	this.purchased = false;
+	
+};
+
+button.prototype.draw = function() {
+    ctx.lineWidth = 3;
+    if (this.purchased == false){ctx.strokeStyle = "red";}  if (this.purchased == true){ctx.strokeStyle = "green";}
+	if (this.purchased == true){ctx.drawImage(check,this.x - shiftX + 20,this.y - shiftY,80,80);}
+    if (this.s == scene){ctx.strokeRect(this.x - shiftX, this.y - shiftY, this.w, this.h);}
+	
+	if (this.checking == true && this.purchased == false){
+		this.verified = true;
+		if (this.s != scene){this.verified = false;}
+		if (points - this.c < 0){this.verified = false;}
+	}
+	
+	if (this.verified == true){
+	    if (this.purchased == false){
+		points = points - this.c; 
+		printout += this.n + "\n\n";
+		assignedSound.play();
+		}
+		this.purchased = true;
+	}
+};
+
+
+var buttonArray = [];
+
+buttonArray.push(new button(365,140,480,220,300,"\n\nMilana Vayntrub: Daily Nudes",1));
+buttonArray.push(new button(500,140,610,220,1000,"\n\nMilana Vayntrub: Daily Footjobs",1));
+buttonArray.push(new button(640,140,760,220,1500,"\n\nMilana Vayntrub: Daily Blowjobs",1));
+
+buttonArray.push(new button(365,250,480,330,1500,"\n\nMilana Vayntrub: Daily Thighjobs",1));
+buttonArray.push(new button(500,250,610,330,1500,"\n\nMilana Vayntrub: Daily Titjobs",1));
+buttonArray.push(new button(640,250,760,330,3000,"\n\nMilana Vayntrub: Daily Anal",1));
+
+
+buttonArray.push(new button(365 + 800,140,480 + 800,220,500,"\n\nEmilia Clarke: Daily Nudes",1));
+buttonArray.push(new button(500 + 800,140,610 + 800,220,1100,"\n\nEmilia Clarke: Daily Footjobs",1));
+buttonArray.push(new button(640 + 800,140,760 + 800,220,1800,"\n\nEmilia Clarke: Daily Blowjobs",1));
+
+buttonArray.push(new button(365 + 800,250,480 + 800,330,1600,"\n\nEmilia Clarke: Daily Thighjobs",1));
+buttonArray.push(new button(500 + 800,250,610 + 800,330,1300,"\n\nEmilia Clarke: Daily Titjobs",1));
+buttonArray.push(new button(640 + 800,250,760 + 800,330,3900,"\n\nEmilia Clarke: Daily Anal",1));
+
+function clickfunc(){
+
+for(var i = 0; i < buttonArray.length ; i++) {
+			if (canvasX > buttonArray[i].x - shiftX && canvasX < buttonArray[i].x + buttonArray[i].w - shiftX){
+				if (canvasY > buttonArray[i].y - shiftY && canvasY < buttonArray[i].y + buttonArray[i].h - shiftY){
+					if (scene == buttonArray[i].s){buttonArray[i].checking = true;}
+				}
+				
+			}
+			
+}
+
+if (canvasX > 240 && canvasX < 300 && canvasY > 330 && canvasY < 400){shiftX = shiftX + 800; tabSound.play();}
+if (canvasX > 0 && canvasX < 60 && canvasY > 330 && canvasY < 400){shiftX = shiftX - 800; tabSound.play();}
+
+
+}//End clickfunc
+
+var myVar = setInterval(move, 20);
+
+var scene = 1; 
+
+var points = 30000;
+
+var shiftX = 0;
+
+var shiftY = 0;
+
+var printout = "";
+
+function move() {
+
+//BG
+ctx.fillStyle = "black";
+ctx.fillRect(0,0, 800, 400);
+
+ctx.fillStyle = "gray";
+ctx.fillRect(0,400, 800, 400);
+
+ctx.font = "20px Arial";
+ctx.fillStyle = "white";
+ctx.fillText("X: " + canvasX,4,420);
+ctx.fillText("Y: " + canvasY,3,440);
+
+ctx.fillText("shiftX: " + shiftX,220,420);
+ctx.fillText("shiftY: " + shiftY,220,440);
+
+
+ctx.fillText("Scene: " + scene,80,420);
+ctx.fillText("Points: " + points,80,440);
+
+//Scenes
+if (scene == 1){
+ctx.drawImage(select1,0 - shiftX,0,800,400); if (shiftX < 0){shiftX = 0;}
+ctx.drawImage(select2,800 - shiftX,0,800,400);
+
+
+ctx.font = "40px Times New Roman";
+ctx.fillStyle = "black";
+ctx.fillText("You have: $" + pointsString,400,35);
+
+commafy(points);
+}
+
+
+//Prototypes
+for(var i = 0; i < buttonArray.length ; i++) {
+        buttonArray[i].draw();
+}
+
+
+
+
+
+
+document.getElementById("demo").innerHTML = printout; 
+
+
+}//End of FUNCTION
+
+
+var pointsString = "";
+function commafy(num) {
+    var str = num.toString().split('.');
+    if (str[0].length >= 5) {
+        str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+    }
+    if (str[1] && str[1].length >= 5) {
+        str[1] = str[1].replace(/(\d{3})/g, '$1 ');
+    }
+    pointsString = str.join('.');
+}
+
+</script>
+
+<p class="a" id = "demo" value = ""></p>
+
+<img id="check"  style="display:none; visibility:hidden;" src="check.png" alt="">
+
+<img id="select1"  style="display:none; visibility:hidden;" src="gui1/select1.png" alt="">
+<img id="select2"  style="display:none; visibility:hidden;" src="gui1/select2.png" alt="">
+
+</html> 
