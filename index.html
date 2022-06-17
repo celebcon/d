@@ -101,8 +101,7 @@ buttonArray.push(new button(640,140,760,220,1000,"\n\nMilana Vayntrub: Daily Blo
 buttonArray.push(new button(365,250,480,330,1200,"\n\nMilana Vayntrub: Daily Thighjobs",1));
 buttonArray.push(new button(500,250,610,330,1300,"\n\nMilana Vayntrub: Daily Titjobs",1));
 buttonArray.push(new button(640,250,760,330,1800,"\n\nMilana Vayntrub: Daily Anal",1));
-
-
+//................................................................................................
 buttonArray.push(new button(365 + 800,140,480 + 800,220,600,"\n\nEmilia Clarke: Daily Nudes",1));
 buttonArray.push(new button(500 + 800,140,610 + 800,220,900,"\n\nEmilia Clarke: Daily Footjobs",1));
 buttonArray.push(new button(640 + 800,140,760 + 800,220,1200,"\n\nEmilia Clarke: Daily Blowjobs",1));
@@ -110,6 +109,33 @@ buttonArray.push(new button(640 + 800,140,760 + 800,220,1200,"\n\nEmilia Clarke:
 buttonArray.push(new button(365 + 800,250,480 + 800,330,1300,"\n\nEmilia Clarke: Daily Thighjobs",1));
 buttonArray.push(new button(500 + 800,250,610 + 800,330,1400,"\n\nEmilia Clarke: Daily Titjobs",1));
 buttonArray.push(new button(640 + 800,250,760 + 800,330,2000,"\n\nEmilia Clarke: Daily Anal",1));
+//................................................................................................
+buttonArray.push(new button(365 + 1600,140,480 + 1600,220,100,"\n\nDaniella Pineda: Daily Nudes",1));
+buttonArray.push(new button(500 + 1600,140,610 + 1600,220,400,"\n\nDaniella Pineda: Daily Footjobs",1));
+buttonArray.push(new button(640 + 1600,140,760 + 1600,220,700,"\n\nDaniella Pineda: Daily Blowjobs",1));
+
+buttonArray.push(new button(365 + 1600,250,480 + 1600,330,900,"\n\nDaniella Pineda: Daily Thighjobs",1));
+buttonArray.push(new button(500 + 1600,250,610 + 1600,330,1000,"\n\nDaniella Pineda: Daily Titjobs",1));
+buttonArray.push(new button(640 + 1600,250,760 + 1600,330,1200,"\n\nDaniella Pineda: Daily Anal",1));
+
+//................................................................................................
+buttonArray.push(new button(365 + 2400,140,480 + 2400,220,600,"\n\nKat Dennings: Daily Nudes",1));
+buttonArray.push(new button(500 + 2400,140,610 + 2400,220,800,"\n\nKat Dennings: Daily Footjobs",1));
+buttonArray.push(new button(640 + 2400,140,760 + 2400,220,1100,"\n\nKat Dennings: Daily Blowjobs",1));
+
+buttonArray.push(new button(365 + 2400,250,480 + 2400,330,1200,"\n\nKat Dennings: Daily Thighjobs",1));
+buttonArray.push(new button(500 + 2400,250,610 + 2400,330,1400,"\n\nKat Dennings: Daily Titjobs",1));
+buttonArray.push(new button(640 + 2400,250,760 + 2400,330,1700,"\n\nKat Dennings: Daily Anal",1));
+
+
+//................................................................................................
+buttonArray.push(new button(365 + 3200,140,480 + 3200,220,200,"\n\nKatrina Bowden: Daily Nudes",1));
+buttonArray.push(new button(500 + 3200,140,610 + 3200,220,400,"\n\nKatrina Bowden: Daily Footjobs",1));
+buttonArray.push(new button(640 + 3200,140,760 + 3200,220,600,"\n\nKatrina Bowden: Daily Blowjobs",1));
+
+buttonArray.push(new button(365 + 3200,250,480 + 3200,330,900,"\n\nKatrina Bowden: Daily Thighjobs",1));
+buttonArray.push(new button(500 + 3200,250,610 + 3200,330,1100,"\n\nKatrina Bowden: Daily Titjobs",1));
+buttonArray.push(new button(640 + 3200,250,760 + 3200,330,1500,"\n\nKatrina Bowden: Daily Anal",1));
 
 function clickfunc(){
 
@@ -135,7 +161,7 @@ var myVar = setInterval(move, 20);
 //IMPORTANT
 var scene = 1; 
 
-var points = 30000;
+var points = 10000;
 
 //IMPORTANT
 
@@ -169,6 +195,9 @@ ctx.fillText("Points: " + points,80,440);
 if (scene == 1){
 ctx.drawImage(select1,0 - shiftX,0,800,400); if (shiftX < 0){shiftX = 0;}
 ctx.drawImage(select2,800 - shiftX,0,800,400);
+ctx.drawImage(select3,1600 - shiftX,0,800,400);
+ctx.drawImage(select4,2400 - shiftX,0,800,400);
+ctx.drawImage(select5,3200 - shiftX,0,800,400);
 
 
 ctx.font = "40px Times New Roman";
@@ -215,5 +244,8 @@ function commafy(num) {
 
 <img id="select1"  style="display:none; visibility:hidden;" src="gui1/select1.png" alt="">
 <img id="select2"  style="display:none; visibility:hidden;" src="gui1/select2.png" alt="">
+<img id="select3"  style="display:none; visibility:hidden;" src="gui1/select3.png" alt="">
+<img id="select4"  style="display:none; visibility:hidden;" src="gui1/select4.png" alt="">
+<img id="select5"  style="display:none; visibility:hidden;" src="gui1/select5.png" alt="">
 
 </html> 
