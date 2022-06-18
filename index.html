@@ -52,6 +52,7 @@ this.sound.pause();
 
 tabSound = new sound("sounds/tabSound.mp3");
 assignedSound = new sound("sounds/assignedSound.mp3");
+impact = new sound("sounds/impact.mp3");
 
 var button = function(x,y,endx,endy,c,n,s) {
     this.x = x;
@@ -72,13 +73,13 @@ var button = function(x,y,endx,endy,c,n,s) {
 button.prototype.draw = function() {
     ctx.lineWidth = 3;
     if (this.purchased == false){ctx.strokeStyle = "red";}  if (this.purchased == true){ctx.strokeStyle = "green";}
-	if (this.purchased == true){ctx.drawImage(check,this.x - shiftX + 20,this.y - shiftY,80,80);}
-    if (this.s == scene){ctx.strokeRect(this.x - shiftX, this.y - shiftY, this.w, this.h);}
+	if (this.purchased == true && this.s == scene){ctx.drawImage(check,this.x - shiftX + 20,this.y - shiftY,80,80);}
+    //if (this.s == scene){ctx.strokeRect(this.x - shiftX, this.y - shiftY, this.w, this.h);}
 	
 	if (this.checking == true && this.purchased == false){
 		this.verified = true;
 		if (this.s != scene){this.verified = false;}
-		if (points - this.c < 0){this.verified = false;}
+		if (points - this.c < 0 && this.s == scene){this.verified = false; ctx.drawImage(nocheck,this.x - shiftX + 10,this.y - shiftY,100,100);}
 	}
 	
 	if (this.verified == true){
@@ -404,25 +405,29 @@ if (scene == 1 && canvasX > 240 && canvasX < 300 && canvasY > 330 && canvasY < 4
 if (scene == 1 && canvasX > 0 && canvasX < 60 && canvasY > 330 && canvasY < 400){shiftX = shiftX - 800; tabSound.play();}
 
 
+if (scene == 2 && canvasX > 90 && canvasX < 720 && canvasY > 230 && canvasY < 330){
+scene = 3; impact.play(); copyToClipboard(printout);
+}
 
-if (scene == -17 && animY == 1200){scene = 1; acc = 30;}
+
+if (scene == -17 && animY == 1200){scene = 1; acc = 30; impact.play();}
 
 if (scene == -18 && animY == 800  && canvasX > 0 && canvasX < 260 && canvasY > 60 && canvasY < 400){
-scene = -17; acc = 30; printout+="\n\nTour Guide: Jenna Coleman\n"; points = points - 3000;
+scene = -17; acc = 30; printout+="\n\nTour Guide: Jenna Coleman\n"; points = points - 3000; impact.play();
 }
 
 if (scene == -18 && animY == 800  && canvasX > 260 && canvasX < 530 && canvasY > 60 && canvasY < 400){
-scene = -17; acc = 30; printout+="\n\nTour Guide: Evangeline Lilly\n"; points = points - 3500;
+scene = -17; acc = 30; printout+="\n\nTour Guide: Evangeline Lilly\n"; points = points - 3500; impact.play();
 }
 
 if (scene == -18 && animY == 800  && canvasX > 530 && canvasY > 60 && canvasY < 400){
-scene = -17; acc = 30; printout+="\n\nTour Guide: Lili Reinhart\n"; points = points - 5000;
+scene = -17; acc = 30; printout+="\n\nTour Guide: Lili Reinhart\n"; points = points - 5000; impact.play();
 }
 
 
-if (scene == -19 && animY == 400  && canvasX > 180 && canvasX < 620 && canvasY > 320 && canvasY < 400){scene = -18; acc = 30;}
+if (scene == -19 && animY == 400  && canvasX > 180 && canvasX < 620 && canvasY > 320 && canvasY < 400){scene = -18; acc = 30; impact.play();}
 
-if (scene == -20 && animY == 0 && canvasX > 220 && canvasX < 590 && canvasY > 250 && canvasY < 330){scene = -19; acc = 30;}
+if (scene == -20 && animY == 0 && canvasX > 220 && canvasX < 590 && canvasY > 250 && canvasY < 330){scene = -19; acc = 30; impact.play();}
 
 }//End clickfunc
 
@@ -432,7 +437,7 @@ var myVar = setInterval(move, 20);
 //IMPORTANT
 var scene = -20; 
 
-var points = 10000;
+var points = 20000;
 
 //IMPORTANT
 
@@ -448,6 +453,9 @@ var animY = 0;
 
 var acc = 10;
 
+var transX = 0;
+var transY = 0;
+
 function move() {
 
 //BG
@@ -455,7 +463,7 @@ ctx.fillStyle = "#2d8ac2";
 ctx.fillRect(0,0, 800, 400);
 
 //Scenes
-if (scene == 1){
+if (scene == 1 || scene == 2){
 ctx.drawImage(select1,0 - shiftX,1600 - animY,800,400); if (shiftX < 0){shiftX = 0;}
 ctx.drawImage(select2,800 - shiftX,0,800,400);
 ctx.drawImage(select3,1600 - shiftX,0,800,400);
@@ -492,6 +500,8 @@ ctx.font = "40px Times New Roman";
 ctx.fillStyle = "black";
 ctx.fillText("You have: $" + pointsString,400,35);
 
+if (points < 100){scene = 2;}
+
 commafy(points);
 }
 
@@ -525,6 +535,16 @@ if (scene == -17){
 if (scene == 1){
     ctx.drawImage(page4,0,1200 - animY,800,400);
 	if (animY < 1600){animY += acc; acc = acc - 1;} if (animY > 1600){animY -= 1;}
+}
+
+if (scene == 2){
+    ctx.drawImage(out,0,0,transX,transY);
+	if (transX < 800){transX+=20;}
+	if (transY < 400){transY+=10;}
+}
+
+if (scene == 3){
+ctx.drawImage(end,0,0,800,400);
 }
 
 
@@ -567,11 +587,27 @@ function commafy(num) {
     pointsString = str.join('.');
 }
 
+
+function copyToClipboard(text) {
+   const elem = document.createElement('textarea');
+   elem.value = text;
+   document.body.appendChild(elem);
+   elem.select();
+   document.execCommand('copy');
+   document.body.removeChild(elem);
+}
+
 </script>
 
 <p class="a" id = "demo" value = ""></p>
 
 <img id="check"  style="display:none; visibility:hidden;" src="check.png" alt="">
+<img id="nocheck"  style="display:none; visibility:hidden;" src="nocheck.png" alt="">
+
+<img id="out"  style="display:none; visibility:hidden;" src="out.png" alt="">
+
+<img id="end"  style="display:none; visibility:hidden;" src="end.png" alt="">
+
 
 <img id="page1"  style="display:none; visibility:hidden;" src="pages/page1.png" alt="">
 <img id="page2"  style="display:none; visibility:hidden;" src="pages/page2.png" alt="">
